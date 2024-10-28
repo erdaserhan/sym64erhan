@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use App\Entity\Section;
 use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use Faker\Factory as Faker;
@@ -85,7 +86,18 @@ class AppFixtures extends Fixture
             $manager->persist($article);
         }
 
-
+        // Section
+        for ($i=1; $i<=6; $i++){
+            $section = new Section();
+            $section->setSectionTitle($faker->sentence(3, true));
+            $section->setSectionSlug($slugify->slugify($section->getSectionTitle()));
+            $section->setSectionDetail($faker->text(255));
+            $articleRandom = array_rand($articles, mt_rand(2,40));
+            foreach ($articleRandom as $article){
+                $section->addArticle($articles[$article]);
+            }
+            $manager->persist($section);
+        }
 
 
         $manager->flush();

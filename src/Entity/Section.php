@@ -42,7 +42,7 @@ class Section
 
     public function getSectionTitle(): ?string
     {
-        return $this->section_title;
+        return $this->sectionTitle;
     }
 
     public function setSectionTitle(string $sectionTitle): static
