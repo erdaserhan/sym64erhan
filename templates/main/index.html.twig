@@ -1,5 +1,28 @@
 {% extends 'template.front.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block main %}
+
+    <!-- banner post start-->
+    <section class="banner_post">
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                {% for articleB in articleBanner %}
+                <div class="banner_post_1 banner_post_bg_1">
+                    <div class="banner_post_iner text-center">
+                        {% for section in articleB.sections %}
+                        <a href="{{ path("section", {'slug': section.sectionSlug }) }}"><h5> {{ section.sectionTitle }}</h5></a>
+                        {% endfor %}
+                        <a href="single-blog.html"><h2>{{ articleB.title }}</h2></a>
+                        <p>{{ articleB.User.fullname }} - {{ articleB.articleDatePosted|date("m/d/Y") }}</p>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- banner post end-->
+
+{% endblock %}
 
 

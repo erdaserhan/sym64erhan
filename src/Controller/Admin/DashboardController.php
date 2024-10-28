@@ -53,7 +53,7 @@ class DashboardController extends AbstractDashboardController
     {
 
         // Add the exit button to the menu
-        yield MenuItem::linkToUrl('Go to Homepage', 'fa fa-sign-out', $this->generateUrl('homepage'));
+        yield MenuItem::linkToUrl('Return to Homepage', 'fa fa-sign-out', $this->generateUrl('homepage'));
 
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
