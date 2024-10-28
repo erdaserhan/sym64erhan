@@ -16,13 +16,13 @@ class Section
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $section_title = null;
+    private ?string $sectionTitle = null;
 
     #[ORM\Column(length: 105,unique: true)]
-    private ?string $section_slug = null;
+    private ?string $sectionSlug = null;
 
     #[ORM\Column(length: 500, nullable: true)]
-    private ?string $section_detail = null;
+    private ?string $sectionDetail = null;
 
     /**
      * @var Collection<int, Article>
@@ -45,33 +45,33 @@ class Section
         return $this->section_title;
     }
 
-    public function setSectionTitle(string $section_title): static
+    public function setSectionTitle(string $sectionTitle): static
     {
-        $this->section_title = $section_title;
+        $this->sectionTitle = $sectionTitle;
 
         return $this;
     }
 
     public function getSectionSlug(): ?string
     {
-        return $this->section_slug;
+        return $this->sectionSlug;
     }
 
-    public function setSectionSlug(string $section_slug): static
+    public function setSectionSlug(string $sectionSlug): static
     {
-        $this->section_slug = $section_slug;
+        $this->sectionSlug = $sectionSlug;
 
         return $this;
     }
 
     public function getSectionDetail(): ?string
     {
-        return $this->section_detail;
+        return $this->sectionDetail;
     }
 
-    public function setSectionDetail(?string $section_detail): static
+    public function setSectionDetail(?string $sectionDetail): static
     {
-        $this->section_detail = $section_detail;
+        $this->sectionDetail = $sectionDetail;
 
         return $this;
     }

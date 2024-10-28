@@ -19,30 +19,30 @@ class Article
     #[ORM\Column(length: 160)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 160)]
-    private ?string $title_slug = null;
+    #[ORM\Column(length: 162,unique: true)]
+    private ?string $titleSlug = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE,options: ["default" => "CURRENT_TIMESTAMP"])]
-    private ?\DateTimeInterface $article_date_create = null;
+    private ?\DateTimeInterface $articleDateCreate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $article_date_posted = null;
+    private ?\DateTimeInterface $articleDatePosted = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private ?bool $published = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
 
     /**
      * @var Collection<int, Section>
      */
     #[ORM\ManyToMany(targetEntity: Section::class, inversedBy: 'articles')]
     private Collection $sections;
-
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
 
     public function __construct()
     {
@@ -68,12 +68,12 @@ class Article
 
     public function getTitleSlug(): ?string
     {
-        return $this->title_slug;
+        return $this->titleSlug;
     }
 
-    public function setTitleSlug(string $title_slug): static
+    public function setTitleSlug(string $titleSlug): static
     {
-        $this->title_slug = $title_slug;
+        $this->titleSlug = $titleSlug;
 
         return $this;
     }
@@ -92,24 +92,24 @@ class Article
 
     public function getArticleDateCreate(): ?\DateTimeInterface
     {
-        return $this->article_date_create;
+        return $this->articleDateCreate;
     }
 
-    public function setArticleDateCreate(\DateTimeInterface $article_date_create): static
+    public function setArticleDateCreate(\DateTimeInterface $articleDateCreate): static
     {
-        $this->article_date_create = $article_date_create;
+        $this->articleDateCreate = $articleDateCreate;
 
         return $this;
     }
 
     public function getArticleDatePosted(): ?\DateTimeInterface
     {
-        return $this->article_date_posted;
+        return $this->articleDatePosted;
     }
 
-    public function setArticleDatePosted(?\DateTimeInterface $article_date_posted): static
+    public function setArticleDatePosted(?\DateTimeInterface $articleDatePosted): static
     {
-        $this->article_date_posted = $article_date_posted;
+        $this->articleDatePosted = $articleDatePosted;
 
         return $this;
     }
@@ -122,6 +122,18 @@ class Article
     public function setPublished(bool $published): static
     {
         $this->published = $published;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): static
+    {
+        $this->User = $User;
 
         return $this;
     }
@@ -146,18 +158,6 @@ class Article
     public function removeSection(Section $section): static
     {
         $this->sections->removeElement($section);
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
 
         return $this;
     }
