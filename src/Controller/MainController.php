@@ -16,12 +16,21 @@ class MainController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $sections = $em->getRepository(Section::class)->findAll();
-        $articles = $em->getRepository(Article::class)->findBy(['published'=>true], ['articleDatePosted' => 'DESC'], 10);
+        $articles = $em->getRepository(Article::class)->findBy(['published' => true], ['articleDatePosted' => 'DESC'], 10);
         return $this->render('main/index.html.twig', [
             // on envoie les catégories à la vue
             'sections' => $sections,
             // on envoie les articles à la vue
             'articles' => $articles,
+        ]);
+    }
+
+    #[Route('/section/{slug}', name: 'section')]
+    public function section($slug, EntityManagerInterface $em): Response
+    {
+        $section = $em->getRepository(Section::class)->findOneBy(['sectionSlug' => $slug]);
+        return $this->render('main/section.html.twig', [
+            'section' => $section,
         ]);
     }
 

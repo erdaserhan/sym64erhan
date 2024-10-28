@@ -1,7 +1,6 @@
 <li class="nav-item"><a class="nav-link" aria-current="page" href="{{ path('homepage') }}">Home</a></li>
-{% for categ in categories %}
-    <li class="nav-item"><a class="nav-link" aria-current="page"
-                            href="{{ path("section", { 'slug' :  categ.sectionSlug }) }}">{{ categ.sectionTitle }}</a>
+{% for categ in sections %}
+    <li class="nav-item"><a class="nav-link" aria-current="page" href="{{ path("section", { 'slug' :  categ.sectionSlug }) }}">{{ categ.sectionTitle }}</a>
     </li>
 {% endfor %}
     {% if is_granted("ROLE_USER") %}
