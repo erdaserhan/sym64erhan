@@ -12,13 +12,13 @@ class Section
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(options: ["unsigned" => true])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
     private ?string $section_title = null;
 
-    #[ORM\Column(length: 105)]
+    #[ORM\Column(length: 105,unique: true)]
     private ?string $section_slug = null;
 
     #[ORM\Column(length: 500, nullable: true)]
