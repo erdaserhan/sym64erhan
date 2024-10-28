@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block header %}
+        <header class="header_area">
+            <div class="main_menu">
+                {% block nav %}
+                    {% include 'main/_menu.html.twig' %}
+                {% endblock %}
+            </div>
+        </header>
+    {% endblock %}
+
+    {% block main %}
+
+    {% endblock %}
+
+
+{% endblock %}
