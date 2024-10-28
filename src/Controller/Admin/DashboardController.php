@@ -46,11 +46,15 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Sym64erhan');
+            ->setTitle('Welcome To Admin Panel');
     }
 
     public function configureMenuItems(): iterable
     {
+
+        // Add the exit button to the menu
+        yield MenuItem::linkToUrl('Go to Homepage', 'fa fa-sign-out', $this->generateUrl('homepage'));
+
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
         yield MenuItem::section('Articles');
