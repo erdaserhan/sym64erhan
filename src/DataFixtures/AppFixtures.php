@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
         $user->setRoles(['ROLE_ADMIN']);
         $user->setFullname('admin Admin');
         $user->setEmail($faker->email());
-        $user->setUniqid(uniqid("user_", true));
+        $user->setUniqid(uniqid("admin_", true));
         $user->setActivate(true);
         $users[] = $user;
         $manager->persist($user);
@@ -48,14 +48,14 @@ class AppFixtures extends Fixture
             $user->setRoles(['ROLE_REDAC']);
             $user->setFullname($faker->name());
             $user->setEmail($faker->email());
-            $user->setUniqid(uniqid("user_", true));
+            $user->setUniqid(uniqid("redac_", true));
             $user->setActivate(true);
             $users[] = $user;
             $manager->persist($user);
         }
 
         // User
-        for($i=1;$i<=24;$i++){
+        for($i=1; $i<=24; $i++){
             $user = new User();
             $user->setUsername('user'.$i);
             $user->setPassword($this->passwordHasher->hashPassword($user, 'user'.$i));
@@ -69,12 +69,12 @@ class AppFixtures extends Fixture
         }
 
         // Article
-        for($i=1;$i<=160;$i++){
+        for($i=1; $i<=160; $i++){
             $article = new Article();
             $article->setTitle($faker->sentence(5));
             $article->setText($faker->paragraph(5, true));
             $article->setTitleSlug($slugify->slugify($article->getTitle()));
-            $article->getArticleDateCreate($faker->dateTimeBetween('-6 months'));
+            $article->setArticleDateCreate($faker->dateTimeBetween('-6 months'));
             $hasard = mt_rand(1,4)<4;
             $article->setPublished($hasard);
             if($hasard){
@@ -84,6 +84,8 @@ class AppFixtures extends Fixture
             $article->setUser($faker->randomElement($users));
             $manager->persist($article);
         }
+
+
 
 
         $manager->flush();
