@@ -25,7 +25,7 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE,options: ["default" => "CURRENT_TIMESTAMP"])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ["default" => "CURRENT_TIMESTAMP"])]
     private ?\DateTimeInterface $articleDateCreate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

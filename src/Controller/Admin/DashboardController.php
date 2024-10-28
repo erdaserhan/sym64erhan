@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Entity\Section;
+use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -12,6 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+
+    public function __construct(private AdminUrlGenerator $adminUrlGenerator)
+    {
+
+    }
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -19,8 +27,9 @@ class DashboardController extends AbstractDashboardController
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
-        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(ArticleCrudController::class)->generateUrl());
+        //$adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        $url = $this->adminUrlGenerator->setController(ArticleCrudController::class)->generateUrl();
+        return $this->redirect($url);
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -43,6 +52,17 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+
+        yield MenuItem::section('Articles');
+        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Create Article', 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Articles', 'fas fa-eye', Article::class)
+        ]);
+
+        yield MenuItem::section('Sections');
+        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Create Section', 'fas fa-plus', Section::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Sections', 'fas fa-eye', Section::class)
+        ]);
     }
 }
