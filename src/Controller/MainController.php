@@ -28,11 +28,13 @@ class MainController extends AbstractController
     #[Route('/section/{slug}', name: 'section')]
     public function section($slug, EntityManagerInterface $em): Response
     {
+        $articles = $em->getRepository(Article::class)->findAll();
         $sections = $em->getRepository(Section::class)->findAll();
         $section = $em->getRepository(Section::class)->findOneBy(['sectionSlug' => $slug]);
         return $this->render('main/section.html.twig', [
             'sections' => $sections,
             'section' => $section,
+            'articles' => $articles,
         ]);
     }
 
