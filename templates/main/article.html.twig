@@ -30,10 +30,11 @@
                                 <h2>{{ article.title }}
                                 </h2>
                                 <ul class="blog-info-link mt-3 mb-4">
-                                    {% for section in sections %}
+                                    {% for section in article.sections %}
                                         <li><a href="{{ path("section", {'slug': section.sectionSlug }) }}"><i class="far fa-user"></i> {{ section.sectionTitle }}</a></li>
+                                    {% else %}
+                                        <p>Pas de Section</p>
                                     {% endfor %}
-                                    <br>
                                     <br>
                                     <hr>
                                     <p class="excert">{{ article.text }} </p>
