@@ -15,7 +15,7 @@
                             <h3>Pas de section</h3>
                         {% endfor %}
                         <a href="#"><h2>{{ articleB.title }}</h2></a>
-                        <p>{{ articleB.User.fullname }} - {{ articleB.articleDatePosted|date("m/d/Y") }}</p>
+                        <p>{{ articleB.User.fullname }} - le {{ articleB.articleDatePosted|date("d/m/Y \à H:i") }}</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -31,30 +31,32 @@
             <div class="row">
 
     {% block articles %}
-        <div class="col-lg-8">
-            <div class="row">
-                <div class="col-lg-6 col-sm-6">
-                {% for articleB in articles %}
-
-                    <div class="single_post post_1">
-
-                        <div class="single_post_img">
-                            <img src="img/post/post_18.png" alt="">
+                <div class="col-lg-8">
+                    <div class="row">
+                        {% for article in articles %}
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="single_post post_1">
+                                <div class="single_post_img">
+                                    <img src="{{ asset('img/post/post_12.png') }}" alt="">
+                                </div>
+                                <div class="single_post_text text-center">
+                                    {% for section in article.sections %}
+                                    <a href="{{ path("section", {'slug': section.sectionSlug }) }}"><h5> {{ section.sectionTitle }}</h5></a>
+                                    {% else %}
+                                        <h3>Pas de section</h3>
+                                    {% endfor %}
+                                    <a href="{{ path("article", {'slug': article.titleSlug }) }}"><h2>{{ article.title }}</h2></a>
+                                    <p>{{ article.text|u.truncate(200, '...', false)|striptags }}<a class="text-decoration-none" href="{{ path("article", { 'slug' :  article.titleSlug }) }}">
+                                            Lire la suite
+                                            <i class="bi bi-arrow-right"></i><p></p>
+                                        </a></p>
+                                    <p>{{ article.User.fullname }} - le {{ article.articleDatePosted|date("d/m/Y \à H:i") }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="single_post_text text-center">
-                            {% for section in articleB.sections %}
-                            <a href="{{ path("section", {'slug': section.sectionSlug }) }}"><h5> {{ section.sectionTitle }}</h5></a>
-                            {% else %}
-                                <h3>Pas de section</h3>
-                            {% endfor %}
-                            <a href="{{ path("article", {'slug': section.sectionSlug }) }}"><h2>{{ articleB.title }}</h2></a>
-                            <p>{{ articleB.User.fullname }} - {{ articleB.articleDatePosted|date("m/d/Y") }}</p>
-                        </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
                 </div>
-            </div>
-        </div>
     {% endblock %}
 
     {% block sideWidget %}
@@ -88,7 +90,7 @@
                         <div class="social_connect">
                             <div class="single-social_connect">
                                 <div class="social_connect_img">
-                                    <img src="img/insta/instagram_1.png" class="" alt="blog">
+                                    <img src="{{ asset('img/insta/instagram_1.png') }}" class="" alt="blog">
                                     <div class="social_connect_overlay">
                                         <a href="#"><span class="ti-instagram"></span></a>
                                     </div>
@@ -96,7 +98,7 @@
                             </div>
                             <div class="single-social_connect">
                                 <div class="social_connect_img">
-                                    <img src="img/insta/instagram_2.png" class="" alt="blog">
+                                    <img src="{{ asset('img/insta/instagram_2.png') }}" class="" alt="blog">
                                     <div class="social_connect_overlay">
                                         <a href="#"><span class="ti-instagram"></span></a>
                                     </div>
@@ -104,7 +106,7 @@
                             </div>
                             <div class="single-social_connect">
                                 <div class="social_connect_img">
-                                    <img src="img/insta/instagram_3.png" class="" alt="blog">
+                                    <img src="{{ asset('img/insta/instagram_3.png') }}" class="" alt="blog">
                                     <div class="social_connect_overlay">
                                         <a href="#"><span class="ti-instagram"></span></a>
                                     </div>
@@ -112,7 +114,7 @@
                             </div>
                             <div class="single-social_connect">
                                 <div class="social_connect_img">
-                                    <img src="img/insta/instagram_4.png" class="" alt="blog">
+                                    <img src="{{ asset('img/insta/instagram_4.png') }}" class="" alt="blog">
                                     <div class="social_connect_overlay">
                                         <a href="#"><span class="ti-instagram"></span></a>
                                     </div>
@@ -120,7 +122,7 @@
                             </div>
                             <div class="single-social_connect">
                                 <div class="social_connect_img">
-                                    <img src="img/insta/instagram_5.png" class="" alt="blog">
+                                    <img src="{{ asset('img/insta/instagram_5.png') }}" class="" alt="blog">
                                     <div class="social_connect_overlay">
                                         <a href="#"><span class="ti-instagram"></span></a>
                                     </div>
@@ -128,7 +130,7 @@
                             </div>
                             <div class="single-social_connect">
                                 <div class="social_connect_img">
-                                    <img src="img/insta/instagram_6.png" class="" alt="blog">
+                                    <img src="{{ asset('img/insta/instagram_6.png') }}" class="" alt="blog">
                                     <div class="social_connect_overlay">
                                         <a href="#"><span class="ti-instagram"></span></a>
                                     </div>

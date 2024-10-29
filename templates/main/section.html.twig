@@ -23,26 +23,25 @@
 
     {% block singlePost %}
         <div class="single-post">
-            <div class="feature-img">
-                <img class="img-fluid" src="img/blog/single_blog_1.png" alt="">
-            </div>
             {% for post in section.articles %}
+            <div class="feature-img">
+                <img class="img-fluid" src="{{ asset('img/blog/single_blog_1.png') }}" alt="">
+            </div>
             <div class="blog_details">
-                <h2>{{ post.title }}
-                </h2>
                 <ul class="blog-info-link mt-3 mb-4">
-                    <li><a href="#"><i class="far fa-user"></i> {{ post.User.username }}</a></li>
-                    <br><hr>
                     {% for section in sections %}
-                    <li><a href="{{ path("section", {'slug': section.sectionSlug }) }}"><i class="far fa-user"></i> {{ section.sectionTitle }}</a></li>
+                        <li><a href="{{ path("section", {'slug': section.sectionSlug }) }}"><i class="far fa-user"></i> {{ section.sectionTitle }}</a></li>
                     {% endfor %}
-                    <br>
-                    <hr>
-                    <li><a href="#"><i class="far fa-comments"></i> {{ post.articleDateCreate ? post.articleDateCreate|date('Y-m-d') : '' }}</a></li>
                 </ul>
-                <p class="excert">
-                    {{ post.text }}
-                </p>
+                <h2>{{ post.title }} </h2>
+                <ul class="blog-info-link mt-3 mb-4">
+                    <hr>
+                    <p class="excert">{{ post.text }} </p>
+                    <li>Written by <a href="#"><i class="far fa-user"></i> {{ post.User.username }}</a></li>
+                    <li>Le <i class="far fa-comments"></i> {{ post.articleDateCreate ? post.articleDateCreate|date("d/m/Y \à H:i") : '' }}</li>
+                </ul>
+                <br>
+                <hr>
                 {% endfor %}
             </div>
         </div>
