@@ -8,13 +8,14 @@
             <div class="row justify-content-between">
                 {% for articleB in articleBanner %}
                 <div class="banner_post_1 banner_post_bg_1">
+                    <img src="{{ asset('img/banner_blog/banner_blog_1.png') }}" alt="">
                     <div class="banner_post_iner text-center">
                         {% for section in articleB.sections %}
                         <a href="{{ path("section", {'slug': section.sectionSlug }) }}"><h5> {{ section.sectionTitle }}</h5></a>
                         {% else %}
                             <h3>Pas de section</h3>
                         {% endfor %}
-                        <a href="#"><h2>{{ articleB.title }}</h2></a>
+                        <a href="{{ path("article", {'slug': articleB.titleSlug }) }}"><h2>{{ articleB.title }}</h2></a>
                         <p>{{ articleB.User.fullname }} - le {{ articleB.articleDatePosted|date("d/m/Y \à H:i") }}</p>
                     </div>
                 </div>
@@ -31,32 +32,32 @@
             <div class="row">
 
     {% block articles %}
-                <div class="col-lg-8">
-                    <div class="row">
-                        {% for article in articles %}
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single_post post_1">
-                                <div class="single_post_img">
-                                    <img src="{{ asset('img/post/post_12.png') }}" alt="">
-                                </div>
-                                <div class="single_post_text text-center">
-                                    {% for section in article.sections %}
-                                    <a href="{{ path("section", {'slug': section.sectionSlug }) }}"><h5> {{ section.sectionTitle }}</h5></a>
-                                    {% else %}
-                                        <h3>Pas de section</h3>
-                                    {% endfor %}
-                                    <a href="{{ path("article", {'slug': article.titleSlug }) }}"><h2>{{ article.title }}</h2></a>
-                                    <p>{{ article.text|u.truncate(200, '...', false)|striptags }}<a class="text-decoration-none" href="{{ path("article", { 'slug' :  article.titleSlug }) }}">
-                                            Lire la suite
-                                            <i class="bi bi-arrow-right"></i><p></p>
-                                        </a></p>
-                                    <p>{{ article.User.fullname }} - le {{ article.articleDatePosted|date("d/m/Y \à H:i") }}</p>
-                                </div>
-                            </div>
+        <div class="col-lg-8">
+            <div class="row">
+                {% for article in articles %}
+                <div class="col-lg-6 col-sm-6">
+                    <div class="single_post post_1">
+                        <div class="single_post_img">
+                            <img src="{{ asset('img/post/post_12.png') }}" alt="">
                         </div>
-                        {% endfor %}
+                        <div class="single_post_text text-center">
+                            {% for section in article.sections %}
+                            <a href="{{ path("section", {'slug': section.sectionSlug }) }}"><h5> {{ section.sectionTitle }}</h5></a>
+                            {% else %}
+                                <h3>Pas de section</h3>
+                            {% endfor %}
+                            <a href="{{ path("article", {'slug': article.titleSlug }) }}"><h2>{{ article.title }}</h2></a>
+                            <p>{{ article.text|u.truncate(200, '...', false)|striptags }}<a class="text-decoration-none" href="{{ path("article", { 'slug' :  article.titleSlug }) }}">
+                                    Lire la suite
+                                    <i class="bi bi-arrow-right"></i><p></p>
+                                </a></p>
+                            <p>{{ article.User.fullname }} - le {{ article.articleDatePosted|date("d/m/Y \à H:i") }}</p>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
+            </div>
+        </div>
     {% endblock %}
 
     {% block sideWidget %}

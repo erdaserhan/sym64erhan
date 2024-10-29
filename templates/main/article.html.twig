@@ -30,18 +30,16 @@
                                 <h2>{{ article.title }}
                                 </h2>
                                 <ul class="blog-info-link mt-3 mb-4">
-                                    <li><a href="#"><i class="far fa-user"></i> {{ article.User.username }}</a></li>
-                                    <br><hr>
                                     {% for section in sections %}
                                         <li><a href="{{ path("section", {'slug': section.sectionSlug }) }}"><i class="far fa-user"></i> {{ section.sectionTitle }}</a></li>
                                     {% endfor %}
                                     <br>
+                                    <br>
                                     <hr>
-                                    <li><a href="#"><i class="far fa-comments"></i> {{ article.articleDateCreate ? article.articleDateCreate|date('Y-m-d') : '' }}</a></li>
+                                    <p class="excert">{{ article.text }} </p>
+                                    <li>Ecrit par <i class="far fa-user"></i> {{ article.User.username }}</li>
+                                    <li>Le <i class="far fa-comments"></i> {{ article.articleDateCreate ? article.articleDateCreate|date("d/m/Y \à H:i") : '' }}</li>
                                 </ul>
-                                <p class="excert">
-                                    {{ article.text }}
-                                </p>
 
                             </div>
                         </div>
@@ -174,12 +172,9 @@
                                 </div>
                                 <div class="single_catagory_item category">
                                     <ul class="list-unstyled">
-                                        <li><a href="single-blog.html">Culture</a> <span>(15)</span> </li>
-                                        <li><a href="single-blog.html">Creative Design</a> <span>(15)</span> </li>
-                                        <li><a href="single-blog.html">Illustration</a> <span>(15)</span> </li>
-                                        <li><a href="single-blog.html">Production</a> <span>(15)</span> </li>
-                                        <li><a href="single-blog.html">Mangement</a> <span>(15)</span> </li>
-                                        <li><a href="single-blog.html">Branding</a> <span>(15)</span> </li>
+                                        {% for section in sections %}
+                                        <li><a href="{{ path("section", { 'slug': section.sectionSlug}) }}">{{ section.sectionTitle }}</a> <span>(15)</span> </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>

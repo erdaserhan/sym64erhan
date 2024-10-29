@@ -7,7 +7,7 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-sm-6">
                         <div class="breadcrumb_tittle text-left">
-                            <h2>Article details</h2>
+                            <h2>Sections</h2>
                         </div>
                     </div>
                 </div>
@@ -16,12 +16,12 @@
         <!-- breadcrumb start-->
     {% endblock %}
         <!--================Blog Area =================-->
-        <section class="blog_area single-post-area all_post section_padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 posts-list">
+    <section class="blog_area single-post-area all_post section_padding">
+        <div class="container">
+            <div class="row">
 
     {% block singlePost %}
+    <div class="col-lg-8 posts-list">
         <div class="single-post">
             {% for post in section.articles %}
             <div class="feature-img">
@@ -37,7 +37,7 @@
                 <ul class="blog-info-link mt-3 mb-4">
                     <hr>
                     <p class="excert">{{ post.text }} </p>
-                    <li>Written by <a href="#"><i class="far fa-user"></i> {{ post.User.username }}</a></li>
+                    <li>Ecrit par <i class="far fa-user"></i> {{ post.User.username }}</li>
                     <li>Le <i class="far fa-comments"></i> {{ post.articleDateCreate ? post.articleDateCreate|date("d/m/Y \à H:i") : '' }}</li>
                 </ul>
                 <br>
@@ -45,147 +45,9 @@
                 {% endfor %}
             </div>
         </div>
+    </div>
     {% endblock %}
 
-    {% block comments %}
-        <div class="comments-area">
-            <h4>05 Comments</h4>
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="img/comment/comment_1.png" alt="">
-                        </div>
-                        <div class="desc">
-                            <p class="comment">
-                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <h5>
-                                        <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="img/comment/comment_2.png" alt="">
-                        </div>
-                        <div class="desc">
-                            <p class="comment">
-                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <h5>
-                                        <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="img/comment/comment_3.png" alt="">
-                        </div>
-                        <div class="desc">
-                            <p class="comment">
-                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <h5>
-                                        <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endblock %}
-
-    {% block commentForm %}
-        <div class="comment-form">
-            <h4>Leave a Reply</h4>
-            <form class="form-contact comment_form" action="#" id="commentForm">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                        placeholder="Write Comment"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                        </div>
-                    </div>
-                </div>
-                <div class="load_btn">
-                    <a href="#" class="btn_1">SUBMIT </a>
-                </div>
-            </form>
-        </div>
-    {% endblock %}
-        </div>
-    {% block sideWidget %}
-        <div class="col-lg-4">
-            <div class="sidebar_widget">
-                <div class="single_sidebar_wiget">
-                    <div class="sidebar_tittle">
-                        <h3>Sections</h3>
-                    </div>
-                    <div class="single_catagory_item category">
-                        <ul class="list-unstyled">
-                            <li><a href="single-blog.html">Culture</a> <span>(15)</span> </li>
-                            <li><a href="single-blog.html">Creative Design</a> <span>(15)</span> </li>
-                            <li><a href="single-blog.html">Illustration</a> <span>(15)</span> </li>
-                            <li><a href="single-blog.html">Production</a> <span>(15)</span> </li>
-                            <li><a href="single-blog.html">Mangement</a> <span>(15)</span> </li>
-                            <li><a href="single-blog.html">Branding</a> <span>(15)</span> </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endblock %}
             </div>
         </div>
     </section>
