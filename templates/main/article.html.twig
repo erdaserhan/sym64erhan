@@ -47,17 +47,18 @@
                     {% endblock %}
 
                     {% block comments %}
+
                         <div class="comments-area">
                             <h4>05 Comments</h4>
                             <div class="comment-list">
+                                {% for comment in article.comments %}
                                 <div class="single-comment justify-content-between d-flex">
                                     <div class="user justify-content-between d-flex">
-                                        {% for comment in article.comments %}
+
+                                            {% if comment.parent == null %}
                                         <div class="thumb">
                                             <img src="img/comment/comment_1.png" alt="">
                                         </div>
-
-
                                         <div class="desc">
                                             <p class="comment">
                                                 {{ comment.content|raw }}
@@ -65,20 +66,39 @@
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <h5>
-                                                        <a href="#">{{ comment.name }}</a>
+                                                        Commenté par {{ comment.name }} le {{ comment.createdAt|date("d/m/Y \à H:i") }}
                                                     </h5>
-                                                    <p class="date">Le {{ comment.createdAt|date("d/m/Y \à H:i") }}</p>
                                                 </div>
                                                 <div class="reply-btn">
                                                     <a href="#ajout-commentaire" data-reply data-id="{{ comment.id }}" class="btn-reply text-uppercase">reply</a>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {% for reply in comment.replies %}
+                                            <div class="desc">
+                                                <p class="comment">
+                                                    {{ reply.content|raw }}
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <h5>
+                                                            Reponse par {{ reply.name }} le {{ reply.createdAt|date("d/m/Y \à H:i") }}
+                                                        </h5>
                                         {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        {% endif %}
+
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
                         </div>
+
                     {% endblock %}
 
                     {% block commentForm %}
@@ -86,41 +106,6 @@
                             {{ form(commentForm) }}
                         </div>
 
-
-
-
-
-                        <div class="comment-form">
-                            <h4>Leave a Reply</h4>
-                            <form class="form-contact comment_form" action="#" id="commentForm">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                        placeholder="Write Comment"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="load_btn">
-                                    <a href="#" class="btn_1">SUBMIT </a>
-                                </div>
-                            </form>
-                        </div>
                     {% endblock %}
                 </div>
                 {% block sideWidget %}
@@ -209,6 +194,22 @@
             </div>
         </footer>
         <!-- footer part end-->
+    {% endblock %}
+
+
+    {% block javascriptss %}
+        <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+        <script src="{{ asset('js/ckeditor.js') }}"></script>
+        <script>
+            window.onload = () => {
+
+                document.querySelectorAll("[data-reply]").forEach(element => {
+                    element.addEventListener("click", function(){
+                        document.querySelector("#comments_parentid").value = this.dataset.id;
+                    });
+                });
+            }
+        </script>
     {% endblock %}
 
 

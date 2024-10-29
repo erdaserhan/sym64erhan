@@ -40,7 +40,7 @@ class CommentsType extends AbstractType
                 ]
             ])
             ->add('rgpd', checkboxType::class)
-            ->add('parent', HiddenType::class, [
+            ->add('parentid', HiddenType::class, [
                 'mapped' => false,
             ])
             ->add('envoyer', SubmitType::class)
