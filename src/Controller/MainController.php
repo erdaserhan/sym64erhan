@@ -49,7 +49,6 @@ class MainController extends AbstractController
         $articles = $em->getRepository(Article::class)->findAll();
         $article = $em->getRepository(Article::class)->findOneBy(['titleSlug' => $slug]);
 
-
         // Partie commentaires
         // création du commentaire "vierge"
         $comment = new Comments();
@@ -87,6 +86,20 @@ class MainController extends AbstractController
             'article' => $article,
             'articles' => $articles,
             'commentForm' => $commentForm->createView(),
+        ]);
+    }
+
+
+    #[Route('/articleuser/{user}', name: 'articleUser')]
+    public function articleUser($user, EntityManagerInterface $em): Response
+    {
+        $articles = $em->getRepository(Article::class)->findAll();
+        $sections = $em->getRepository(Section::class)->findAll();
+        $articleUser = $em->getRepository(Article::class)->findOneBy(['User' => $user]);
+        return $this->render('main/articleUser.html.twig', [
+            'sections' => $sections,
+            'articleUser' => $articleUser,
+            'articles' => $articles,
         ]);
     }
 

@@ -1,0 +1,30 @@
+{% block singlePost %}
+    <div class="col-lg-8 posts-list">
+        <div class="single-post">
+            {% for post in articles %}
+            <div class="feature-img">
+                <img class="img-fluid" src="{{ asset('img/blog/single_blog_1.png') }}" alt="">
+            </div>
+            <div class="blog_details">
+                <ul class="blog-info-link mt-3 mb-4">
+                    {% for section in post.sections %}
+                        <li><a href="{{ path("section", {'slug': section.sectionSlug }) }}"><i class="far fa-user"></i> {{ section.sectionTitle }}</a></li>
+                    {% endfor %}
+                </ul>
+                <h2>{{ post.title }} </h2>
+                <ul class="blog-info-link mt-3 mb-4">
+                    <hr>
+                    <p>{{ post.text|u.truncate(200, '...', false)|striptags }}<a class="text-decoration-none" href="{{ path("article", { 'slug' :  post.titleSlug }) }}">
+                            Lire la suite
+                            <i class="bi bi-arrow-right"></i>
+                        </a></p>
+                    <li>Ecrit par <i class="far fa-user"></i>{{ post.User.username }}</li>
+                    <li>Le <i class="far fa-comments"></i> {{ post.articleDateCreate ? post.articleDateCreate|date("d/m/Y \à H:i") : '' }}</li>
+                </ul>
+                <br>
+                <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

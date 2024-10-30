@@ -36,7 +36,10 @@
                 <h2>{{ post.title }} </h2>
                 <ul class="blog-info-link mt-3 mb-4">
                     <hr>
-                    <p class="excert">{{ post.text }} </p>
+                    <p>{{ post.text|u.truncate(200, '...', false)|striptags }}<a class="text-decoration-none" href="{{ path("article", { 'slug' :  post.titleSlug }) }}">
+                            Lire la suite
+                            <i class="bi bi-arrow-right"></i>
+                        </a></p>
                     <li>Ecrit par <i class="far fa-user"></i>{{ post.User.username }}</li>
                     <li>Le <i class="far fa-comments"></i> {{ post.articleDateCreate ? post.articleDateCreate|date("d/m/Y \à H:i") : '' }}</li>
                 </ul>
