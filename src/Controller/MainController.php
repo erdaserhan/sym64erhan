@@ -64,10 +64,10 @@ class MainController extends AbstractController
             $comment->setCreatedAt(new \DateTime());
             $comment->setArticles($article);
 
-            // On récupère le contenu du champ parentid
+            // récupère le contenu du champ parentid
             $parentid = $commentForm->get("parentid")->getData();
 
-            // On va chercher le commentaire correspondant
+            // chercher le commentaire correspondant
             if($parentid != null){
                 $parent = $em->getRepository(Comments::class)->find($parentid);
             }
