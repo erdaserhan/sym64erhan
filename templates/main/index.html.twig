@@ -70,7 +70,7 @@
                     <div class="single_catagory_item category">
                         <ul class="list-unstyled">
                             {% for section in sections %}
-                            <li><a href="{{ path("section", {'slug': section.sectionSlug }) }}">{{ section.sectionTitle }}</a> <span>{{ section.sectionTitle|length }}</span> </li>
+                            <li><a href="{{ path("section", {'slug': section.sectionSlug }) }}">{{ section.sectionTitle }}</a> <span>{{ section.articles|length }}</span> </li>
                             {% endfor %}
                         </ul>
                     </div>

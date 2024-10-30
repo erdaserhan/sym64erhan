@@ -78,12 +78,9 @@ class MainController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-            $this->addFlash('message', 'Votre commentaire a bien été envoyé');
+            //$this->addFlash('message', 'Votre commentaire a bien été envoyé');
             return $this->redirectToRoute('article', ['slug' => $article->getTitleSlug()]);
         }
-
-
-
 
         return $this->render('main/article.html.twig', [
             'sections' => $sections,
