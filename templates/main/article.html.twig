@@ -48,46 +48,70 @@
 
                     {% block comments %}
 
-                        {% for comment in article.comments %}
-                            {% if comment.parent == null %}
-                                <h3>Commentaire : {{ loop.index }}</h3>
-                                    <p class="comment">
-                                        {{ comment.content|raw }}
-                                    </p>
-                                            <h5>
-                                                Commenté par {{ comment.name }} le {{ comment.createdAt|date("d/m/Y \à H:i") }}
-                                            </h5>
-                                        <div class="reply-btn">
-                                            <a href="#ajout-commentaire" data-reply data-id="{{ comment.id }}" class="btn-reply text-uppercase">reply</a>
+
+
+
+
+
+
+                        <div class="comments-area">
+                            <h4>05 Comments</h4>
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+
+                                        <div class="desc">
+                                            {% for comment in article.comments %}
+                                                {% if comment.parent == null %}
+                                                    <p class="comment">
+                                                    <div class="thumb">
+                                                        <img src="{{ asset('img/comment/comment_1.png') }}" alt="">
+
+                                                            {{ comment.content|raw }}
+                                                        </p>
+                                                    </div>
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <div class="d-flex align-items-center">
+                                                    <h5>
+                                                        <a href="#">Commenté par {{ comment.name }} le {{ comment.createdAt|date("d/m/Y \à H:i") }}</a>
+                                                    </h5>
+                                                </div>
+                                                <div class="reply-btn">
+                                                    <a href="#ajout-commentaire" data-reply data-id="{{ comment.id }}"  class="btn-reply text-uppercase">reply</a>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                                {% for reply in comment.replies %}
+                                            <div class="mb-5 ml-5">
+                                                    <p>
+                                                        <span class="material-symbols-outlined">comment</span> {{ reply.content|raw }}
+                                                    </p>
+                                                    <h5>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>{{ reply.name }}, le {{ reply.createdAt|date("d/m/Y \à H:i") }}
+                                                    </h5>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% endfor %}
                                         </div>
-                                {% for reply in comment.replies %}
-                                    <p class="comment">
-                                        {{ reply.content|raw }}
-                                    </p>
-                                    <h5>
-                                        Reponse par {{ reply.name }} le {{ reply.createdAt|date("d/m/Y \à H:i") }}
-                                    </h5>
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-
-
-
-
-
-
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                     {% endblock %}
+
+
 
                     {% block commentForm %}
                         <div id="ajout-commentaire">
                             {{ form(commentForm) }}
                         </div>
-
                     {% endblock %}
+
                 </div>
+
                 {% block sideWidget %}
                     <div class="col-lg-4">
                         <div class="sidebar_widget">
