@@ -14,7 +14,7 @@ RUN mkdir -p /usr/src/app \
     && docker-php-ext-install -j"$(nproc)" intl pdo_mysql \
     && pecl install apcu \
     && docker-php-ext-enable apcu intl \
-    && apk del .build-deps \
+    && apk del .build-deps
 
 
 WORKDIR /usr/src/app

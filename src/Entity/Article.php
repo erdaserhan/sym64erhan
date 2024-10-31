@@ -50,7 +50,7 @@ class Article
     #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'articles', orphanRemoval: true)]
     private Collection $comments;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
     public function __construct()
