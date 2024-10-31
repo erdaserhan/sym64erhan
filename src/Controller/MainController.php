@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comments;
+use App\Entity\User;
 use App\Form\CommentsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,13 +94,13 @@ class MainController extends AbstractController
     #[Route('/articleuser/{user}', name: 'articleUser')]
     public function articleUser($user, EntityManagerInterface $em): Response
     {
-        $articles = $em->getRepository(Article::class)->findAll();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => $user]);
         $sections = $em->getRepository(Section::class)->findAll();
-        $articleUser = $em->getRepository(Article::class)->findOneBy(['User' => $user]);
+        $articleUser = $em->getRepository(Article::class)->findBy(['User' => $user->getId()]);
         return $this->render('main/articleUser.html.twig', [
             'sections' => $sections,
-            'articleUser' => $articleUser,
-            'articles' => $articles,
+            'articles' => $articleUser,
+
         ]);
     }
 
