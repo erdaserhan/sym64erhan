@@ -51,7 +51,7 @@
                                     Lire la suite
                                     <i class="bi bi-arrow-right"></i>
                                 </a></p>
-                            <p><a href="{{ path("articleUser", {'user': article.User }) }}">{{ article.User.fullname }}</a> - le {{ article.articleDatePosted|date("d/m/Y \à H:i") }}</p>
+                            <p>{{ article.User.fullname }} - le {{ article.articleDatePosted|date("d/m/Y \à H:i") }}</p>
                         </div>
                     </div>
                 </div>
