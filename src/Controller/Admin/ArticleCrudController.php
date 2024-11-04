@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -27,7 +28,7 @@ class ArticleCrudController extends AbstractCrudController
             AssociationField::new('User'),
             TextField::new('title'),
             SlugField::new('title_slug')->setTargetFieldName('title'),
-            TextField::new('text'),
+            TextareaField::new('text'),
             DatetimeField::new('article_date_create'),
             DateTimeField::new('article_date_posted'),
             BooleanField::new('published'),
