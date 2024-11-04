@@ -26,3 +26,5 @@ RUN PATH=$PATH:/usr/src/app/vendor/bin:bin
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY . /usr/src/app
+
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install
